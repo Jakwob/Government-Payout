@@ -4,10 +4,18 @@
 
 #include <a_samp>
 
-public OnFilterScriptInit()
+new PayoutTimer[MAX_PLAYERS];
+
+public OnPlayerConnect(playerid)
 {
-    SetTimer("GovermentPayout", 1800000, 1);
+    PayoutTimer[playerid] = SetTimer("GovermentPayout", 1800000, true, "i", playerid);
     return 1;
+}
+
+public OnPlayerDisconnect(playerid, reason)
+{
+	KillTimer(PayoutTimer[playerid]);
+	return 1;
 }
 
 forward GovermentPayout();
