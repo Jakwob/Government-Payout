@@ -4,22 +4,10 @@
 
 #include <a_samp>
 
-new GovermentPayRandom[][] =
-	{
-		{149},
-		{242},
-		{538},
-		{754},
-		{1422},
-		{22},
-		{864},
-		{392}
-	};
-
 public OnFilterScriptInit()
 {
     SetTimer("GovermentPayout", 1800000, 1);
-	  return 1;
+    return 1;
 }
 
 forward GovermentPayout();
@@ -29,7 +17,13 @@ public GovermentPayout()
 	{
 	    new rand = random(sizeof(GovermentPayRandom));
 	   	GameTextForPlayer(i, "Goverment Payout", 1000, 1);
-	   	GivePlayerMoney(i, GovermentPayRandom[rand][0]);
+	   	GivePlayerMoney(i, randomEx(500, 5000));
 	}
 	return 1;
+}
+
+stock randomEx(min, max)
+{
+    new rand = random(max-min)+min;    
+    return rand;
 }
